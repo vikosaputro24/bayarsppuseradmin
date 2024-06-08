@@ -61,7 +61,21 @@
                     </div>
                     <div class="mb-3">
                         <label for="bulan_pembayaran" class="form-label text-white">Bulan Pembayaran</label>
-                        <input type="text" class="form-control" name="bulan_pembayaran" placeholder="Bulan Pembayaran" required>
+                        <select class="form-select" name="bulan_pembayaran" id="bulan_pembayaran" required>
+                            <option selected disabled value="">Pilih bulan pembayaran</option>
+                            <option value="Januari">Januari</option>
+                            <option value="Febuari">Febuari</option>
+                            <option value="Maret">Maret</option>
+                            <option value="April">April</option>
+                            <option value="Mei">Mei</option>
+                            <option value="Juni">Juni</option>
+                            <option value="Juli">Juli</option>
+                            <option value="Agustus">Agustus</option>
+                            <option value="September">September</option>
+                            <option value="Oktober">Oktober</option>
+                            <option value="November">November</option>
+                            <option value="Desember">Desember</option>
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label for="tanggal_pembayaran" class="form-label text-white">Tanggal Pembayaran</label>

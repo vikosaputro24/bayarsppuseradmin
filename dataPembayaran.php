@@ -125,12 +125,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['delete_id'])) {
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Login</a>
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="#!">Login Admin</a>
+                                    <a class="dropdown-item" href="./dataLoginAdmin.php">Login Admin</a>
                                     <a class="dropdown-item" href="./dataLoginUser.php">Login User</a>
                                 </div>
                             </li>
                             <li class="nav-item active"><a class="nav-link" href="./dataPembayaran.php">Data Pembayaran</a></li>
-                            <li class="nav-item active"><a class="nav-link" href="#!">Pengumuman</a></li>
+                            <li class="nav-item active"><a class="nav-link" href="./adminPengumuman.php">Pengumuman</a></li>
                             <li class="nav-item active"><a class="nav-link" href="#!">Status</a></li>
                         </ul>
                         <button class="btn btn-primary" id="sidebarToggle" onclick="logoutFunction()"><i class="fas fa-sign-out-alt icon"></i>Logout</button>
@@ -152,7 +152,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['delete_id'])) {
                                 <th>Bulan pembayaran</th>
                                 <th>Tanggal pembayaran</th>
                                 <th>Jumlah pembayaran</th>
-                                <th>Unggah Bukti Pembayaran</th>
+                                <th>Bukti Pembayaran</th>
+                                <th>Invoice</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -171,11 +172,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['delete_id'])) {
                                     <td><?php echo $result['kelas']; ?></td>
                                     <td><?php echo $result['bulan_pembayaran']; ?></td>
                                     <td><?php echo $result['tanggal_pembayaran']; ?></td>
-                                    <td><?php echo $result['jumlah_pembayaran']; ?></td>
-                                    <td><?php echo $result['bukti_pembayaran']; ?></td>
+                                    <td>Rp <?php echo number_format($result['jumlah_pembayaran'], 0, ',', '.'); ?></td>
                                     <td>
-                                        <a href="javascript:void(0);" onclick="detailFunction(<?php echo $result['id']; ?>)" class="btn btn-sm btn-info"><i class="fas fa-info-circle icon"></i>Detail</a>
-                                        <a href="dataPembayaran.php?delete_id=<?php echo $result['id']; ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt icon"></i>Delete</a>
+                                        <img src="./uploads/<?php echo $result['bukti_pembayaran']; ?>" alt="Bukti Pembayaran" style="max-width: 100px; cursor: pointer;" onclick="showImage('./uploads/<?php echo $result['bukti_pembayaran']; ?>')">
+                                    </td>
+                                    <td>
+                                        <a href="javascript:void(0);" onclick="detailFunction(<?php echo $result['id']; ?>)" class="btn btn-sm btn-warning">
+                                            <i class="fas fa-info-circle icon"></i>Invoice
+                                        </a>
+                                    </td>
+                                    <td>
+                                    <a href="dataPembayaran.php?delete_id=<?php echo $result['id']; ?>" class="btn btn-sm btn-danger">
+                                            <i class="fas fa-trash-alt icon"></i> Delete
+                                        </a>
                                     </td>
                                 </tr>
                             <?php
@@ -189,6 +198,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['delete_id'])) {
         </div>
     </div>
 
+    <!-- Modal -->
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imageModalLabel">Bukti Pembayaran</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img id="modalImage" src="" alt="Bukti Pembayaran" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         function logoutFunction() {
@@ -197,6 +221,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['delete_id'])) {
 
         function detailFunction(id) {
             window.location.href = 'detail.php?id=' + id;
+        }
+
+        function showImage(src) {
+            var modalImage = document.getElementById('modalImage');
+            modalImage.src = src;
+            var myModal = new bootstrap.Modal(document.getElementById('imageModal'), {
+                keyboard: false
+            });
+            myModal.show();
         }
     </script>
 </body>

@@ -78,16 +78,15 @@
 </head>
 
 <body>
-    <div class="d-flex" id="wrapper">
+<div class="d-flex" id="wrapper">
         <div id="page-content-wrapper">
             <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
                 <div class="container-fluid">
-                <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="#">
                         <img src="./assets/logo ahe putih.png" alt="Logo" width="30" height="30" class="d-inline-block align-top">
                         Anak Hebat.
                     </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -101,15 +100,15 @@
                                 </div>
                             </li>
                             <li class="nav-item active"><a class="nav-link" href="./dataPembayaran.php">Data Pembayaran</a></li>
-                            <li class="nav-item active"><a class="nav-link" href="#!">Pengumuman</a></li>
+                            <li class="nav-item active"><a class="nav-link" href="./adminPengumuman.php">Pengumuman</a></li>
                             <li class="nav-item active"><a class="nav-link" href="#!">Status</a></li>
                         </ul>
-                        <button class="btn btn-primary" id="sidebarToggle"><i class="fas fa-sign-out-alt icon"></i>Logout</button>
+                        <button class="btn btn-primary" id="sidebarToggle" onclick="logoutFunction()"><i class="fas fa-sign-out-alt icon"></i>Logout</button>
                     </div>
                 </div>
             </nav>
             <div class="container-fluid">
-            <h1 class="text-center pt-5">DAFTAR USER LOGIN</h1>
+            <h1 class="text-center pt-5">DAFTAR ADMIN LOGIN</h1>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal"><i class="fas fa-plus icon"></i>Tambah User</button>
            
 
@@ -118,7 +117,6 @@
                             <thead class="bg-info">
                                 <tr>
                                     <th>No</th>
-                                    <th>Nama Lengkap</th>
                                     <th>Username</th>
                                     <th>Email</th>
                                     <th>Action</th>
@@ -127,18 +125,17 @@
                             <tbody>
                                 <?php
                                 include 'koneksi.php';
-                                $query = mysqli_query($conn, "SELECT * FROM tb_login");
+                                $query = mysqli_query($conn, "SELECT * FROM tb_admin");
                                 $no = 1;
                                 while ($result = mysqli_fetch_array($query)) {
                                 ?>
                                 <tr>
                                     <td><?php echo $no; ?></td>
-                                    <td><?php echo $result['fullname']; ?></td>
                                     <td><?php echo $result['username']; ?></td>
                                     <td><?php echo $result['email']; ?></td>
                                     <td>
-                                        <button class="btn btn-sm btn-warning edit-btn" data-id="<?php echo $result['id']; ?>" data-fullname="<?php echo $result['fullname']; ?>" data-username="<?php echo $result['username']; ?>" data-email="<?php echo $result['email']; ?>"><i class="fas fa-edit icon"></i>Edit</button>
-                                        <a href="data.php?delete_id=<?php echo $result['id']; ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt icon"></i>Delete</a>
+                                    <button class="btn btn-sm btn-warning edit-btn" data-id="<?php echo $result['id']; ?>" data-username="<?php echo $result['username']; ?>" data-email="<?php echo $result['email']; ?>"><i class="fas fa-edit icon"></i>Edit</button>
+                                        <a href="data2.php?delete_id=<?php echo $result['id']; ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt icon"></i>Delete</a>
                                     </td>
                                 </tr>
                                 <?php
@@ -160,13 +157,9 @@
                     <h5 class="modal-title" id="addModalLabel">Tambah User</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="data.php" method="POST">
+                <form action="data2.php" method="POST">
                     <div class="modal-body">
                         <input type="hidden" name="operation" value="add">
-                        <div class="form-group">
-                            <label for="fullname">Nama Lengkap</label>
-                            <input type="text" class="form-control" id="fullname" name="fullname" placeholder="Masukkan Nama Lengkap" required>
-                        </div>
                         <div class="form-group">
                             <label for="username">Username</label>
                             <input type="text" class="form-control" id="username" name="username" placeholder
@@ -198,14 +191,10 @@
                     <h5 class="modal-title" id="editModalLabel">Edit User</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="data.php" method="POST">
+                <form action="data2.php" method="POST">
                     <div class="modal-body">
                         <input type="hidden" name="operation" value="update">
                         <input type="hidden" id="edit-id" name="id">
-                        <div class="form-group">
-                            <label for="edit-fullname">Nama Lengkap</label>
-                            <input type="text" class="form-control" id="edit-fullname" name="fullname" placeholder="Masukkan Nama Lengkap" required>
-                        </div>
                         <div class="form-group">
                             <label for="edit-username">Username</label>
                             <input type="text" class="form-control" id="edit-username" name="username" placeholder="Masukkan Username" required>
@@ -237,12 +226,10 @@
         document.querySelectorAll('.edit-btn').forEach(button => {
             button.addEventListener('click', function() {
                 const id = this.getAttribute('data-id');
-                const fullname = this.getAttribute('data-fullname');
                 const username = this.getAttribute('data-username');
                 const email = this.getAttribute('data-email');
 
                 document.getElementById('edit-id').value = id;
-                document.getElementById('edit-fullname').value = fullname;
                 document.getElementById('edit-username').value = username;
                 document.getElementById('edit-email').value = email;
 
