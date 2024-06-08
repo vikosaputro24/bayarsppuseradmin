@@ -1,0 +1,65 @@
+.l-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px; /* Ubah lebar sidebar */
+    height: 100vh;
+    background-color: #34495e; /* Ubah warna sidebar */
+    padding: 1rem;
+    transition: width 0.5s; /* Animasi lebar saat sidebar muncul atau disembunyikan */
+    z-index: var(--z-fixed);
+}
+
+.nav {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Sesuaikan agar menu dimulai dari atas */
+    overflow: hidden;
+}
+
+.nav_logo, .nav_link {
+    display: grid;
+    grid-template-columns: max-content max-content;
+    align-items: center;
+    column-gap: 1rem;
+    padding: 1rem 0; /* Tambahkan sedikit padding */
+}
+
+.nav_logo {
+    margin-bottom: 2rem;
+}
+
+.nav_logo-icon {
+    font-size: 1.5rem; /* Sesuaikan ukuran ikon */
+    color: #fff; /* Ubah warna ikon */
+}
+
+.nav_logo-name {
+    color: #fff; /* Ubah warna teks nama logo */
+    font-weight: 700;
+}
+
+.nav_link {
+    position: relative;
+    color: #fff; /* Ubah warna teks link */
+    margin-bottom: 1rem;
+
+    text-decoration: none;
+}
+
+
+.nav_icon {
+    font-size: 1.25rem;
+}
+
+
+.active::before {
+    content: ''; /* Hapus properti content */
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%; /* Hapus properti width */
+    height: 2px; /* Hapus properti height */
+    background-color: #fff; /* Hapus properti background-color */
+}
