@@ -93,7 +93,7 @@
                         <button type="submit" class="btn btn-primary">Kirim Pembayaran</button>
                     </div>
                     <div class="text-center pb-5">
-                        <a href="./index.php" class="btn btn-warning">Kembali</a>
+                        <a href="./home.php" class="btn btn-warning">Kembali</a>
                     </div>
                 </form>
             </div>
@@ -165,7 +165,7 @@
             $stmt->bind_param("sssssssss", $nama, $no_telepon, $email, $alamat, $kelas, $bulan_pembayaran, $tanggal_pembayaran, $jumlah_pembayaran, $bukti_pembayaran);
 
             if ($stmt->execute()) {
-                echo "<script>alert('Data berhasil disimpan'); window.location.href = './index.php';</script>";
+                echo "<script>alert('Data berhasil disimpan'); window.location.href = './home.php';</script>";
             } else {
                 echo "Error: " . $stmt->error;
             }

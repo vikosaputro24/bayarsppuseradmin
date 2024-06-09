@@ -82,7 +82,7 @@
         <div id="page-content-wrapper">
             <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
                 <div class="container-fluid">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="./homeAdmin.php">
                         <img src="./assets/logo ahe putih.png" alt="Logo" width="30" height="30" class="d-inline-block align-top">
                         Anak Hebat.
                     </a>
@@ -92,7 +92,7 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                            <li class="nav-item active"><a class="nav-link" href="#!">Dashboard</a></li>
+                            <li class="nav-item active"><a class="nav-link" href="./homeAdmin.php">Dashboard</a></li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Login</a>
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -101,10 +101,10 @@
                                 </div>
                             </li>
                             <li class="nav-item active"><a class="nav-link" href="./dataPembayaran.php">Data Pembayaran</a></li>
-                            <li class="nav-item active"><a class="nav-link" href="#!">Pengumuman</a></li>
-                            <li class="nav-item active"><a class="nav-link" href="#!">Status</a></li>
+                            <li class="nav-item active"><a class="nav-link" href="./adminPengumuman.php">Pengumuman</a></li>
+                            <li class="nav-item active"><a class="nav-link" href="./adminStatus.php">Status</a></li>
                         </ul>
-                        <button class="btn btn-primary" id="sidebarToggle"><i class="fas fa-sign-out-alt icon"></i>Logout</button>
+                        <button class="btn btn-primary" id="sidebarToggle" onclick="logoutFunction()"><i class="fas fa-sign-out-alt icon"></i>Logout</button>
                     </div>
                 </div>
             </nav>
@@ -229,6 +229,11 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+                function logoutFunction() {
+            window.location.href = 'login.php';
+        }
+    </script>
     <script>
         document.getElementById("sidebarToggle").addEventListener("click", function () {
             document.getElementById("wrapper").classList.toggle("toggled");

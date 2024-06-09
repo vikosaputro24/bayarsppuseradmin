@@ -129,7 +129,7 @@ $email = $_SESSION['email'];
                             </div>
                             <div class="d-flex justify-content-between">
                                 <div>
-                                    <button type="button" class="btn btn-warning" onclick="location.href='./index.php'">Kembali</button>
+                                    <button type="button" class="btn btn-warning" onclick="location.href='./home.php'">Kembali</button>
                                 </div>
                                 <div>
                                     <button type="button" class="btn btn-info" id="editButton">Edit</button>

@@ -1,5 +1,4 @@
 <?php
-// Enable error reporting
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
@@ -8,25 +7,20 @@ $username = "root";
 $password = "";
 $dbname = "db_spp";
 
-// Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 
-// Check connection
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
-// Retrieve the ID from the URL
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
 
-    // Retrieve data from the database based on the ID
     $query = "SELECT * FROM tb_bayar WHERE id='$id'";
     $result = mysqli_query($conn, $query);
 
     if (mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
-        // Data found, display it
         $nama = $row['nama'];
         $no_telepon = $row['no_telepon'];
         $email = $row['email'];
@@ -35,7 +29,6 @@ if (isset($_GET['id'])) {
         $bulan_pembayaran = $row['bulan_pembayaran'];
         $tanggal_pembayaran = $row['tanggal_pembayaran'];
         $jumlah_pembayaran = $row['jumlah_pembayaran'];
-        // Retrieve the image data
         $bukti_pembayaran = $row['bukti_pembayaran'];
     } else {
         echo "No data found!";
@@ -56,10 +49,8 @@ if (isset($_GET['id'])) {
     <title>Detail Pembayaran</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <style>
-        /* Custom styles untuk tampilan */
         body {
             background-color: gray;
-            /* Warna abu-abu */
         }
 
         .container {
@@ -125,8 +116,6 @@ if (isset($_GET['id'])) {
 </body>
 
 </html>
-
-
 
 <?php
 mysqli_close($conn);

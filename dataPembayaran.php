@@ -4,28 +4,31 @@ $username = "root";
 $password = "";
 $dbname = "db_spp";
 
-// Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 
-// Check connection
 if (!$conn) {
     die("Connection failed: " . mysqli_connect_error());
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['delete_id'])) {
-    // Sanitize input to prevent SQL injection
     $id = mysqli_real_escape_string($conn, $_GET['delete_id']);
-
-    // Perform the deletion
     $query = "DELETE FROM tb_bayar WHERE id='$id'";
     if (mysqli_query($conn, $query)) {
-        // Redirect to dataPembayaran.php
         header('Location: dataPembayaran.php');
         exit();
     } else {
         echo "Error: " . $query . "<br>" . mysqli_error($conn);
     }
 }
+
+$search_query = "";
+if (isset($_GET['search'])) {
+    $search_query = mysqli_real_escape_string($conn, $_GET['search']);
+}
+
+$query = "SELECT * FROM tb_bayar WHERE nama LIKE '%$search_query%'";
+$result = mysqli_query($conn, $query);
+
 ?>
 
 <!DOCTYPE html>
@@ -112,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['delete_id'])) {
         <div id="page-content-wrapper">
             <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="./homeAdmin.php">
                         <img src="./assets/logo ahe putih.png" alt="Logo" width="30" height="30" class="d-inline-block align-top">
                         Anak Hebat.
                     </a>
@@ -121,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['delete_id'])) {
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                            <li class="nav-item active"><a class="nav-link" href="#!">Dashboard</a></li>
+                            <li class="nav-item active"><a class="nav-link" href="./homeAdmin.php">Dashboard</a></li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Login</a>
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -131,15 +134,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['delete_id'])) {
                             </li>
                             <li class="nav-item active"><a class="nav-link" href="./dataPembayaran.php">Data Pembayaran</a></li>
                             <li class="nav-item active"><a class="nav-link" href="./adminPengumuman.php">Pengumuman</a></li>
-                            <li class="nav-item active"><a class="nav-link" href="#!">Status</a></li>
+                            <li class="nav-item active"><a class="nav-link" href="./adminStatus.php">Status</a></li>
                         </ul>
                         <button class="btn btn-primary" id="sidebarToggle" onclick="logoutFunction()"><i class="fas fa-sign-out-alt icon"></i>Logout</button>
                     </div>
                 </div>
             </nav>
             <div class="container-fluid">
-                <h1 class="text-center pt-5">BUKTI PEMBAYARAN</h1>
+                <h1 class="text-center pt-5">DATA PEMBAYARAN</h1>
                 <div class="table-responsive">
+                    <form method="GET" action="dataPembayaran.php" class="mb-3">
+                        <div class="input-group">
+                            <input type="text" name="search" class="form-control" placeholder="Search by Name" value="<?php echo htmlspecialchars($search_query); ?>">
+                            <button class="btn btn-outline-secondary" type="submit">Search</button>
+                        </div>
+                    </form>
                     <table class="table table-bordered" width="100%">
                         <thead class="bg-info">
                             <tr>
@@ -159,30 +168,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['delete_id'])) {
                         </thead>
                         <tbody>
                             <?php
-                            $query = mysqli_query($conn, "SELECT * FROM tb_bayar");
                             $no = 1;
-                            while ($result = mysqli_fetch_assoc($query)) {
+                            while ($row = mysqli_fetch_assoc($result)) {
                             ?>
                                 <tr>
                                     <td><?php echo $no; ?></td>
-                                    <td><?php echo $result['nama']; ?></td>
-                                    <td><?php echo $result['no_telepon']; ?></td>
-                                    <td><?php echo $result['email']; ?></td>
-                                    <td><?php echo $result['alamat']; ?></td>
-                                    <td><?php echo $result['kelas']; ?></td>
-                                    <td><?php echo $result['bulan_pembayaran']; ?></td>
-                                    <td><?php echo $result['tanggal_pembayaran']; ?></td>
-                                    <td>Rp <?php echo number_format($result['jumlah_pembayaran'], 0, ',', '.'); ?></td>
+                                    <td><?php echo $row['nama']; ?></td>
+                                    <td><?php echo $row['no_telepon']; ?></td>
+                                    <td><?php echo $row['email'];
+                                        ?></td>
+                                    <td><?php echo $row['alamat']; ?></td>
+                                    <td><?php echo $row['kelas']; ?></td>
+                                    <td><?php echo $row['bulan_pembayaran']; ?></td>
+                                    <td><?php echo $row['tanggal_pembayaran']; ?></td>
+                                    <td>Rp <?php echo number_format($row['jumlah_pembayaran'], 0, ',', '.'); ?></td>
                                     <td>
-                                        <img src="./uploads/<?php echo $result['bukti_pembayaran']; ?>" alt="Bukti Pembayaran" style="max-width: 100px; cursor: pointer;" onclick="showImage('./uploads/<?php echo $result['bukti_pembayaran']; ?>')">
+                                        <img src="./uploads/<?php echo $row['bukti_pembayaran']; ?>" alt="Bukti Pembayaran" style="max-width: 100px; cursor: pointer;" onclick="showImage('./uploads/<?php echo $row['bukti_pembayaran']; ?>')">
                                     </td>
                                     <td>
-                                        <a href="javascript:void(0);" onclick="detailFunction(<?php echo $result['id']; ?>)" class="btn btn-sm btn-warning">
+                                        <a href="javascript:void(0);" onclick="detailFunction(<?php echo $row['id']; ?>)" class="btn btn-sm btn-warning">
                                             <i class="fas fa-info-circle icon"></i>Invoice
                                         </a>
                                     </td>
                                     <td>
-                                    <a href="dataPembayaran.php?delete_id=<?php echo $result['id']; ?>" class="btn btn-sm btn-danger">
+                                        <a href="dataPembayaran.php?delete_id=<?php echo $row['id']; ?>" class="btn btn-sm btn-danger">
                                             <i class="fas fa-trash-alt icon"></i> Delete
                                         </a>
                                     </td>
@@ -216,7 +225,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['delete_id'])) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         function logoutFunction() {
-            window.location.href = 'login.php';
+            window.location.href = 'home.php';
         }
 
         function detailFunction(id) {

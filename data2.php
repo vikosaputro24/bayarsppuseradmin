@@ -5,7 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($_POST['operation'] == 'add') {
         $username = $_POST['username'];
         $email = $_POST['email'];
-        $password = $_POST['password']; // Anda mungkin perlu melakukan hash password sebelum menyimpannya
+        $password = $_POST['password']; 
 
         $sql = "INSERT INTO tb_admin (username, email, password) VALUES ('$username', '$email', '$password')";
         if (mysqli_query($conn, $sql)) {
@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $id = $_POST['id'];
         $username = $_POST['username'];
         $email = $_POST['email'];
-        $password = $_POST['password']; // Anda mungkin perlu melakukan hash password sebelum menyimpannya
+        $password = $_POST['password']; 
 
         $sql = "UPDATE tb_admin SET username='$username', email='$email', password='$password' WHERE id='$id'";
         if (mysqli_query($conn, $sql)) {
@@ -38,4 +38,3 @@ if (isset($_GET['delete_id'])) {
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
 }
-?>

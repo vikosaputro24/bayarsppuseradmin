@@ -114,7 +114,7 @@
 
     <?php
     require 'koneksi.php';
-    session_start(); 
+    session_start();
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $email = $_POST["email"];
@@ -128,7 +128,7 @@
         if (mysqli_num_rows($result) > 0) {
             $_SESSION['email'] = $email;
             header("Location: homeAdmin.php");
-            exit; 
+            exit;
         } else {
             echo "<script>
                     alert('Email atau kata sandi Anda salah. Silakan coba login kembali.');

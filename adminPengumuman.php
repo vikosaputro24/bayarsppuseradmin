@@ -35,7 +35,7 @@ function updateIndexPengumuman($content)
     <textarea name="pengumuman_content" id="pengumuman_content" rows="6" style="width: calc(100% - 22px); padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 4px; resize: vertical; box-sizing: border-box;" placeholder="Masukkan pengumuman Anda di sini"><?php echo file_get_contents("pengumuman.txt"); ?></textarea>
 
     <input type="submit" value="Simpan perubahan" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; transition: background-color 0.3s; margin-top: 10px; width: calc(100% - 22px);">
-    <input type="button" value="Kembali" onclick="window.location.href='./homeAdmin.php';" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; transition: background-color 0.3s; margin-top: 10px; width: calc(100% - 22px); text-align: center;">
+    <input type="button" value="Kembali" onclick="window.location.href='./homeAdmin.php';" style="background-color: gray; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; transition: background-color 0.3s; margin-top: 10px; width: calc(100% - 22px); text-align: center;">
 </form>
 
     <div id="alert" style="display: none; background-color: #4CAF50; color: white; padding: 10px; margin-top: 20px; border-radius: 4px; text-align: center;">

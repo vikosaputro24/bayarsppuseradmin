@@ -70,7 +70,7 @@
         .form-container .btn {
             width: 100%;
         }
-        
+
         .icon {
             margin-right: 10px;
         }
@@ -78,11 +78,11 @@
 </head>
 
 <body>
-<div class="d-flex" id="wrapper">
+    <div class="d-flex" id="wrapper">
         <div id="page-content-wrapper">
             <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#">
+                    <a class="navbar-brand" href="./homeAdmin.php">
                         <img src="./assets/logo ahe putih.png" alt="Logo" width="30" height="30" class="d-inline-block align-top">
                         Anak Hebat.
                     </a>
@@ -91,7 +91,7 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                            <li class="nav-item active"><a class="nav-link" href="#!">Dashboard</a></li>
+                            <li class="nav-item active"><a class="nav-link" href="./homeAdmin.php">Dashboard</a></li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Login</a>
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
@@ -101,50 +101,50 @@
                             </li>
                             <li class="nav-item active"><a class="nav-link" href="./dataPembayaran.php">Data Pembayaran</a></li>
                             <li class="nav-item active"><a class="nav-link" href="./adminPengumuman.php">Pengumuman</a></li>
-                            <li class="nav-item active"><a class="nav-link" href="#!">Status</a></li>
+                            <li class="nav-item active"><a class="nav-link" href="./adminStatus.php">Status</a></li>
                         </ul>
                         <button class="btn btn-primary" id="sidebarToggle" onclick="logoutFunction()"><i class="fas fa-sign-out-alt icon"></i>Logout</button>
                     </div>
                 </div>
             </nav>
             <div class="container-fluid">
-            <h1 class="text-center pt-5">DAFTAR ADMIN LOGIN</h1>
+                <h1 class="text-center pt-5">DAFTAR ADMIN LOGIN</h1>
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal"><i class="fas fa-plus icon"></i>Tambah User</button>
-           
 
-                    <div class="table-responsive">
-                        <table class="table table-bordered" width="100%">
-                            <thead class="bg-info">
-                                <tr>
-                                    <th>No</th>
-                                    <th>Username</th>
-                                    <th>Email</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                include 'koneksi.php';
-                                $query = mysqli_query($conn, "SELECT * FROM tb_admin");
-                                $no = 1;
-                                while ($result = mysqli_fetch_array($query)) {
-                                ?>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered" width="100%">
+                        <thead class="bg-info">
+                            <tr>
+                                <th>No</th>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            include 'koneksi.php';
+                            $query = mysqli_query($conn, "SELECT * FROM tb_admin");
+                            $no = 1;
+                            while ($result = mysqli_fetch_array($query)) {
+                            ?>
                                 <tr>
                                     <td><?php echo $no; ?></td>
                                     <td><?php echo $result['username']; ?></td>
                                     <td><?php echo $result['email']; ?></td>
                                     <td>
-                                    <button class="btn btn-sm btn-warning edit-btn" data-id="<?php echo $result['id']; ?>" data-username="<?php echo $result['username']; ?>" data-email="<?php echo $result['email']; ?>"><i class="fas fa-edit icon"></i>Edit</button>
+                                        <button class="btn btn-sm btn-warning edit-btn" data-id="<?php echo $result['id']; ?>" data-username="<?php echo $result['username']; ?>" data-email="<?php echo $result['email']; ?>"><i class="fas fa-edit icon"></i>Edit</button>
                                         <a href="data2.php?delete_id=<?php echo $result['id']; ?>" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt icon"></i>Delete</a>
                                     </td>
                                 </tr>
-                                <?php
-                                    $no++;
-                                }
-                                ?>
-                            </tbody>
-                        </table>
-                    </div>
+                            <?php
+                                $no++;
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
                 </center>
             </div>
         </div>
@@ -162,8 +162,7 @@
                         <input type="hidden" name="operation" value="add">
                         <div class="form-group">
                             <label for="username">Username</label>
-                            <input type="text" class="form-control" id="username" name="username" placeholder
-                            ="Masukkan Username" required>
+                            <input type="text" class="form-control" id="username" name="username" placeholder="Masukkan Username" required>
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
@@ -219,7 +218,12 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        document.getElementById("sidebarToggle").addEventListener("click", function () {
+        function logoutFunction() {
+            window.location.href = 'login.php';
+        }
+    </script>
+    <script>
+        document.getElementById("sidebarToggle").addEventListener("click", function() {
             document.getElementById("wrapper").classList.toggle("toggled");
         });
 

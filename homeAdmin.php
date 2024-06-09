@@ -1,33 +1,3 @@
-<?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "db_spp";
-
-// Create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
-
-if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['delete_id'])) {
-    // Sanitize input to prevent SQL injection
-    $id = mysqli_real_escape_string($conn, $_GET['delete_id']);
-
-    // Perform the deletion
-    $query = "DELETE FROM tb_bayar WHERE id='$id'";
-    if (mysqli_query($conn, $query)) {
-        // Redirect to dataPembayaran.php
-        header('Location: dataPembayaran.php');
-        exit();
-    } else {
-        echo "Error: " . $query . "<br>" . mysqli_error($conn);
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -104,6 +74,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['delete_id'])) {
         .icon {
             margin-right: 10px;
         }
+
+        .card {
+            margin: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border: none;
+            border-radius: 10px;
+        }
+
+        .card-body {
+            text-align: center;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .card-text {
+            font-size: 1rem;
+            color: #6c757d;
+        }
+
+        .card-link {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
     </style>
 </head>
 
@@ -131,7 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['delete_id'])) {
                             </li>
                             <li class="nav-item active"><a class="nav-link" href="./dataPembayaran.php">Data Pembayaran</a></li>
                             <li class="nav-item active"><a class="nav-link" href="./adminPengumuman.php">Pengumuman</a></li>
-                            <li class="nav-item active"><a class="nav-link" href="#!">Status</a></li>
+                            <li class="nav-item active"><a class="nav-link" href="./adminStatus.php">Status</a></li>
                         </ul>
                         <button class="btn btn-primary" id="sidebarToggle" onclick="window.location.href='./loginAdmin.php';"><i class="fas fa-sign-out-alt icon"></i>Logout</button>
                     </div>
@@ -140,8 +137,56 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['delete_id'])) {
         </div>
     </div>
 
-
-
+    <div class="container">
+        <h1 class="text-center pt-3">Dashboard</h1>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title"><i class="fas fa-database icon"></i>Data Pembayaran</h2>
+                        <p class="card-text">Kelola data pembayaran.</p>
+                        <a href="dataPembayaran.php" class="card-link">Lihat Detail</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title"><i class="fas fa-bullhorn icon"></i>Pengumuman</h2>
+                        <p class="card-text">Kelola pengumuman kepada pengguna.</p>
+                        <a href="adminPengumuman.php" class="card-link">Lihat Detail</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title"><i class="fas fa-money-check icon"></i>Status Pembayaran</h2>
+                        <p class="card-text">Perbarui status pembayaran.</p>
+                        <a href="adminStatus.php" class="card-link">Lihat Detail</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title"><i class="fas fa-user icon"></i>Daftar Login User</h2>
+                        <p class="card-text">Kelola data user login.</p>
+                        <a href="dataLoginUser.php" class="card-link">Lihat Detail</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h2 class="card-title"><i class="fas fa-user-shield icon"></i>Daftar Login Admin</h2>
+                        <p class="card-text">Kelola data admin login.</p>
+                        <a href="dataLoginAdmin.php" class="card-link">Lihat Detail</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 

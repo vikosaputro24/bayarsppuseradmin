@@ -1,155 +1,157 @@
+<?php
+require 'koneksi.php';
+session_start(); 
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+
+    $query_sql = "SELECT * FROM tb_login
+                WHERE email = '$email' AND password = '$password'";
+
+    $result = mysqli_query($conn, $query_sql);
+
+    if (mysqli_num_rows($result) > 0) {
+        $_SESSION['email'] = $email;
+        header("Location: home.php");
+        exit; 
+    } else {
+        echo "<script>
+                alert('Email atau kata sandi Anda salah. Silakan coba login kembali.');
+                window.location.href = 'login.php';
+              </script>";
+        exit; 
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="./style/home.css">
+    <title>Login Page</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    <link rel="stylesheet" href="./style/login.css">
     <style>
+        html,
         body {
-            background-color: #e9ecef;
+            margin: 0;
+            padding: 0;
         }
 
-        @media (max-width: 991.98px) {
-            .dropdown.text-center .dropdown-toggle {
-                display: block;
-                width: 100%;
-                text-align: center;
-            }
-
-            .dropdown.text-center .dropdown-menu {
-                width: 100%;
-                text-align: center;
-                left: auto;
-                right: 0;
-            }
+        body {
+            position: relative;
+            margin: 0;
+            padding: 0;
+            background: none;
         }
 
-        .box {
-            background-color: rgba(0, 0, 0, 0.5);
-            padding: 20px;
-            border-radius: 10px;
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('./assets/p.jpg') no-repeat center center fixed;
+            background-size: cover;
+
+            z-index: -1;
         }
 
-        .dropdown-menu .dropdown-item:hover {
-            background-color: #54595F !important;
+        .input-group-text {
+            background-color: #343a40;
+            border: none;
+        }
+
+        .input-group .form-control {
+            border-left: none;
+        }
+
+        .input-group .form-control:focus {
+            box-shadow: none;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group i {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: gray;
+        }
+
+        .form-group i.left {
+            left: 15px;
+            top: 50px;
+        }
+
+        .form-group i.right {
+            right: 15px;
+            top: 50px;
+            cursor: pointer;
+        }
+
+        .blur-background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: url('./assets/p.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: blur(8px);
+            z-index: -1;
         }
     </style>
 </head>
-
-<body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-transparent fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="#">Ahe.</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-outline-secondary text-white" href="#home">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-outline-secondary text-white" href="./about.html">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-outline-secondary text-white" href="./pembayaran.php">Pembayaran</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-outline-secondary text-white" href="#pengumuman">Pengumuman</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link btn btn-outline-secondary text-white" href="#product">Contact</a>
-                    </li>
-                    <!-- Logout untuk mobile -->
-                    <li class="nav-item d-lg-none">
-                        <div class="dropdown text-center">
-                            <button class="nav-link btn btn-outline-secondary dropdown-toggle text-white" type="button" id="mobileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                Profile
-                            </button>
-                            <ul class="dropdown-menu text-center" aria-labelledby="mobileDropdown" style="
-                            background-color: #686D76;
-                            ">
-                                <li><a class="dropdown-item text-white" href="./profile.php">Profile</a></li>
-                                <li><a class="dropdown-item text-white" href="">Status Pembayaran</a></li>
-                                <li><a class="dropdown-item text-white" href="./login.php">Logout</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
+<body class="d-flex align-items-center justify-content-center min-vh-100">
+    <div class="blur-background"></div>
+    <div class="bg-dark p-5 rounded-lg shadow-lg w-80">
+        <h2 class="text-center text-white mb-4">LOGIN</h2>
+        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+            <div class="form-group mb-3 position-relative">
+                <label for="email" class="text-light">Email</label>
+                <input type="email" class="form-control pl-5" name="email" placeholder="Masukkan Email" required>
+                <i class="fas fa-envelope left"></i>
             </div>
-            <!-- Logout untuk desktop -->
-            <div class="navbar-nav d-none d-lg-flex ml-auto">
-                <div class="dropdown">
-                    <button class="nav-link btn btn-outline-secondary dropdown-toggle text-white" type="button" id="desktopDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        Profile
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="desktopDropdown" style="
-                        background-color: #686D76;
-                        ">
-                        <li><a class="dropdown-item text-white" href="./profile.php">Profile</a></li>
-                        <li><a class="dropdown-item text-white" href="">Status Pembayaran</a></li>
-                        <li><a class="dropdown-item text-white" href="./login.php">Logout</a></li>
-                    </ul>
-                </div>
+            <div class="form-group mb-3 position-relative">
+                <label for="password" class="text-light">Password</label>
+                <input type="password" class="form-control pl-5" name="password" id="password" placeholder="Masukkan Password" required>
+                <i class="fas fa-lock left"></i>
+                <i class="fas fa-eye-slash right" id="togglePassword"></i>
             </div>
-        </div>
-    </nav>
-
-    <!-- Home Section -->
-    <section id="home" class="d-flex align-items-center" style="height: 100vh; background-image: url('./assets/p.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat; text-align: center; position: relative;">
-        <div class="container text-center text-white">
-            <div class="row">
-                <div class="col-md-8 offset-md-2">
-                    <div class="box">
-                        <h1 class="display-4 mb-4">Welcome to Ahe Website</h1>
-                        <p class="lead">Ini merupakan website pembayaran pada les Ahe.</p>
-                        <a href="./pembayaran.php" class="btn btn-primary mt-3">Pembayaran</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="box-overlay"></div>
-    </section>
-
-
-<!-- Modal untuk menampilkan isi pengumuman -->
-<div class="modal fade" id="pengumumanModal" tabindex="-1" aria-labelledby="pengumumanModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="pengumumanModalLabel">Pengumuman</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p><?php echo file_get_contents("pengumuman.txt"); ?></p>
-            </div>
-        </div>
+            <button type="submit" class="btn btn-outline-light btn-block">Login</button>
+        </form>
+        <p class="text-center text-light mt-3">
+            Belum punya akun? <a href="./register.php" class="text-success">Register disini</a>
+        </p>
     </div>
-</div>
 
-
-    <!-- Script untuk menampilkan modal saat halaman dimuat -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const pengumumanButton = document.querySelector('a[href="#pengumuman"]');
-            if (pengumumanButton) {
-                pengumumanButton.addEventListener('click', function(event) {
-                    event.preventDefault();
-                    const pengumumanModal = new bootstrap.Modal(document.getElementById('pengumumanModal'));
-                    pengumumanModal.show();
-                });
-            }
-        });
-    </script>
+    function togglePassword() {
+        var passwordInput = document.getElementById("password");
+        var toggleIcon = document.getElementById("togglePassword");
 
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            toggleIcon.classList.remove("fa-eye-slash");
+            toggleIcon.classList.add("fa-eye");
+        } else {
+            passwordInput.type = "password";
+            toggleIcon.classList.remove("fa-eye");
+            toggleIcon.classList.add("fa-eye-slash");
+        }
+    }
+
+    document.getElementById("togglePassword").addEventListener("click", togglePassword);
+    </script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
-
 </html>

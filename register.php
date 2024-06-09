@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (mysqli_query($conn, $query_sql)) {
         mysqli_close($conn); 
-        header("Location: login.php");
+        header("Location: index.php");
         exit;
     } else {
         echo "Pendaftaran Gagal : " . mysqli_error($conn);
@@ -134,9 +134,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <button type="submit" class="btn btn-outline-light btn-block">Registrasi</button>
         </form>
         <p class="text-center text-light mt-3">
-            Sudah punya akun? <a href="./login.php" class="text-success">Login disini</a>
+            Sudah punya akun? <a href="./index.php" class="text-success">Login disini</a>
         </p>
     </div>
+
+    <script>
+    function togglePassword() {
+        var passwordInput = document.getElementById("password");
+        var toggleIcon = document.getElementById("togglePassword");
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            toggleIcon.classList.remove("fa-eye-slash");
+            toggleIcon.classList.add("fa-eye");
+        } else {
+            passwordInput.type = "password";
+            toggleIcon.classList.remove("fa-eye");
+            toggleIcon.classList.add("fa-eye-slash");
+        }
+    }
+
+    document.getElementById("togglePassword").addEventListener("click", togglePassword);
+    </script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>

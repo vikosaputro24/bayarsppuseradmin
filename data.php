@@ -55,4 +55,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "Error: " . $query . "<br>" . mysqli_error($conn);
     }
 }
-?>
