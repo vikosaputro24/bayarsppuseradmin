@@ -108,7 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body class="d-flex align-items-center justify-content-center min-vh-100 bg-gradient" style="background-image: linear-gradient(90deg, rgba(145, 175, 175, 1), rgba(188, 146, 166, 1));">
 <div class="blur-background"></div>
     <div class="bg-dark bg-opacity-90 p-5 rounded-lg shadow-lg w-80">
-        <h2 class="text-center text-white mb-4">REGISTRASI</h2>
+        <h2 class="text-center text-white mb-4">DAFTAR</h2>
         <form action="register.php" method="POST">
             <div class="form-group mb-3">
                 <label for="fullname" class="text-light">Nama Lengkap</label>
@@ -131,10 +131,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <i class="fas fa-lock left"></i>
                 <i class="fas fa-eye-slash right" id="togglePassword"></i>
             </div>
-            <button type="submit" class="btn btn-outline-light btn-block">Registrasi</button>
+            <button type="submit" class="btn btn-outline-light btn-block">Daftar</button>
         </form>
         <p class="text-center text-light mt-3">
-            Sudah punya akun? <a href="./index.php" class="text-success">Login disini</a>
+            Sudah punya akun? <a href="./index.php" class="text-success">Masuk disini</a>
         </p>
     </div>
 

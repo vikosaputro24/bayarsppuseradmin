@@ -172,9 +172,9 @@
                 <label for="status">Status Baru:</label>
                 <select id="status" name="status" style="width: 100%;">
                     <option value="Pending">Pending</option>
-                    <option value="Sedang dicek pembayaran">Sedang dicek pembayaran</option>
-                    <option value="Dikonfirmasi pembayaran">Dikonfirmasi pembayaran</option>
-                    <option value="Tidak terkonfirmasi">Tidak terkonfirmasi</option>
+                    <option value="Sedang diverifikasi">Sedang diverifikasi</option>
+                    <option value="Ditolak">Ditolak</option>
+                    <option value="Lunas">Lunas</option>
                 </select>
             </div>
             <div>

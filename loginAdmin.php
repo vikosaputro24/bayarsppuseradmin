@@ -87,7 +87,7 @@
 <body class="d-flex align-items-center justify-content-center min-vh-100">
     <div class="blur-background"></div>
     <div class="bg-dark p-5 rounded-lg shadow-lg w-80">
-        <h2 class="text-center text-white mb-4">LOGIN ADMIN</h2>
+        <h2 class="text-center text-white mb-4">MASUK SEBAGAI ADMIN</h2>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
             <div class="form-group mb-3 position-relative">
                 <label for="email" class="text-light">Email</label>
@@ -100,11 +100,8 @@
                 <i class="fas fa-lock left"></i>
                 <i class="fas fa-eye-slash right" id="togglePassword"></i>
             </div>
-            <button type="submit" class="btn btn-outline-light btn-block">Login</button>
+            <button type="submit" class="btn btn-outline-light btn-block">Masuk</button>
         </form>
-        <p class="text-center text-light mt-3">
-            Belum punya akun? <a href="./regisAdmin.php" class="text-success">Register Admin disini</a>
-        </p>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

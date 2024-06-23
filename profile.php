@@ -109,18 +109,18 @@ $email = $_SESSION['email'];
         <div class="row justify-content-center">
             <div class="col-md-8 mx-auto">
                 <div class="profile-info">
-                    <h3>My Profile</h3>
+                    <h3>Profil Saya</h3>
                     <?php
                     $result = mysqli_query($conn, "SELECT * FROM tb_login WHERE email = '$email'");
                     if ($row = mysqli_fetch_object($result)) {
                     ?>
                         <form action="updateProfile.php" method="POST">
                             <div class="mb-3">
-                                <label for="fullname" class="form-label">Full Name</label>
+                                <label for="fullname" class="form-label">Nama Panjang</label>
                                 <input type="text" class="form-control" name="fullname" value="<?php echo $row->fullname; ?>" readonly>
                             </div>
                             <div class="mb-3">
-                                <label for="username" class="form-label">Username</label>
+                                <label for="username" class="form-label">Nama User</label>
                                 <input type="text" class="form-control" name="username" value="<?php echo $row->username; ?>" readonly>
                             </div>
                             <div class="mb-3">
@@ -132,9 +132,9 @@ $email = $_SESSION['email'];
                                     <button type="button" class="btn btn-warning" onclick="location.href='./home.php'">Kembali</button>
                                 </div>
                                 <div>
-                                    <button type="button" class="btn btn-info" id="editButton">Edit</button>
-                                    <button type="submit" class="btn btn-success d-none" id="saveButton">Save</button>
-                                    <button type="button" class="btn btn-secondary d-none" id="cancelButton">Cancel</button>
+                                    <button type="button" class="btn btn-info" id="editButton">Ubah</button>
+                                    <button type="submit" class="btn btn-success d-none" id="saveButton">Simpan</button>
+                                    <button type="button" class="btn btn-secondary d-none" id="cancelButton">Gagal</button>
                                 </div>
                             </div>
                         </form>

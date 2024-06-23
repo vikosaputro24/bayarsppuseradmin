@@ -118,19 +118,25 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                            <li class="nav-item active"><a class="nav-link" href="#!">Dashboard</a></li>
+                            <li class="nav-item active"><a class="nav-link" href="#!">Beranda</a></li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Login</a>
+                                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Masuk</a>
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="./dataLoginAdmin.php">Login Admin</a>
-                                    <a class="dropdown-item" href="./dataLoginUser.php">Login User</a>
+                                    <a class="dropdown-item" href="./dataLoginAdmin.php">Sebagai Admin</a>
+                                    <a class="dropdown-item" href="./dataLoginUser.php">Sebagai User</a>
                                 </div>
                             </li>
-                            <li class="nav-item active"><a class="nav-link" href="./dataPembayaran.php">Data Pembayaran</a></li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Data</a>
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="./dataPembayaran.php">Data Pembayaran</a>
+                                    <a class="dropdown-item" href="./editSiswaLulus.php">Data Siswa Lulus</a>
+                                </div>
+                            </li>
                             <li class="nav-item active"><a class="nav-link" href="./adminPengumuman.php">Pengumuman</a></li>
                             <li class="nav-item active"><a class="nav-link" href="./adminStatus.php">Status</a></li>
                         </ul>
-                        <button class="btn btn-primary" id="sidebarToggle" onclick="window.location.href='./loginAdmin.php';"><i class="fas fa-sign-out-alt icon"></i>Logout</button>
+                        <button class="btn btn-primary" id="sidebarToggle" onclick="window.location.href='./loginAdmin.php';"><i class="fas fa-sign-out-alt icon"></i>Keluar</button>
                     </div>
                 </div>
             </nav>
@@ -138,7 +144,7 @@
     </div>
 
     <div class="container">
-        <h1 class="text-center pt-3">Dashboard</h1>
+        <h1 class="text-center pt-3">Beranda</h1>
         <div class="row">
             <div class="col-md-4">
                 <div class="card">
@@ -170,8 +176,8 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
-                        <h2 class="card-title"><i class="fas fa-user icon"></i>Daftar Login User</h2>
-                        <p class="card-text">Kelola data user login.</p>
+                        <h2 class="card-title"><i class="fas fa-user icon"></i>Daftar Sebagai User</h2>
+                        <p class="card-text">Kelola data user masuk.</p>
                         <a href="dataLoginUser.php" class="card-link">Lihat Detail</a>
                     </div>
                 </div>
@@ -179,8 +185,8 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
-                        <h2 class="card-title"><i class="fas fa-user-shield icon"></i>Daftar Login Admin</h2>
-                        <p class="card-text">Kelola data admin login.</p>
+                        <h2 class="card-title"><i class="fas fa-user-shield icon"></i>Daftar Sebagai Admin</h2>
+                        <p class="card-text">Kelola data admin masuk.</p>
                         <a href="dataLoginAdmin.php" class="card-link">Lihat Detail</a>
                     </div>
                 </div>

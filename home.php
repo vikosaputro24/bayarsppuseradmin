@@ -50,10 +50,10 @@
             <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link btn btn-outline-secondary text-white" href="./home.php">Home</a>
+                        <a class="nav-link btn btn-outline-secondary text-white" href="./home.php">Beranda</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link btn btn-outline-secondary text-white" href="./about.php">About</a>
+                        <a class="nav-link btn btn-outline-secondary text-white" href="./about.php">Tentang</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link btn btn-outline-secondary text-white" href="./pembayaran.php">Pembayaran</a>
@@ -62,18 +62,18 @@
                         <a class="nav-link btn btn-outline-secondary text-white" href="#pengumuman">Pengumuman</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link btn btn-outline-secondary text-white" href="./contact.php">Contact</a>
+                        <a class="nav-link btn btn-outline-secondary text-white" href="./contact.php">Kontak</a>
                     </li>
                     <!-- Logout untuk mobile -->
                     <li class="nav-item d-lg-none">
                         <div class="dropdown text-center">
                             <button class="nav-link btn btn-outline-secondary dropdown-toggle text-white" type="button" id="mobileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                Profile
+                                Profil
                             </button>
                             <ul class="dropdown-menu text-center" aria-labelledby="mobileDropdown" style="background-color: #686D76;">
-                                <li><a class="dropdown-item text-white" href="./profile.php">Profile</a></li>
+                                <li><a class="dropdown-item text-white" href="./profile.php">Profil</a></li>
                                 <li><a class="dropdown-item text-white" href="./status.php">Status Pembayaran</a></li>
-                                <li><a class="dropdown-item text-white" href="./login.php">Logout</a></li>
+                                <li><a class="dropdown-item text-white" href="./login.php">Keluar</a></li>
                             </ul>
                         </div>
                     </li>
@@ -83,14 +83,15 @@
             <div class="navbar-nav d-none d-lg-flex ml-auto">
                 <div class="dropdown">
                     <button class="nav-link btn btn-outline-secondary dropdown-toggle text-white" type="button" id="desktopDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        Profile
+                        Profil
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="desktopDropdown" style="
                         background-color: #686D76;
                         ">
-                        <li><a class="dropdown-item text-white" href="./profile.php">Profile</a></li>
+                        <li><a class="dropdown-item text-white" href="./profile.php">Profil</a></li>
                         <li><a class="dropdown-item text-white" href="./status.php">Status Pembayaran</a></li>
-                        <li><a class="dropdown-item text-white" href="./index.php">Logout</a></li>
+                        <li><a class="dropdown-item text-white" href="./lihatDataSiswa.php">Data siswa yg sudah lulus</a></li>
+                        <li><a class="dropdown-item text-white" href="./index.php">Keluar</a></li>
                     </ul>
                 </div>
             </div>
@@ -103,7 +104,7 @@
             <div class="row">
                 <div class="col-md-8 offset-md-2">
                     <div class="box">
-                        <h1 class="display-4 mb-4">Welcome to Ahe Website</h1>
+                        <h1 class="display-4 mb-4">Selamat Datang di Website Ahe</h1>
                         <p class="lead">Ini merupakan website pembayaran pada les Ahe.</p>
                         <a href="./pembayaran.php" class="btn btn-primary mt-3">Pembayaran</a>
                     </div>

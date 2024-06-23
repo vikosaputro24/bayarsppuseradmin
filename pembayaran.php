@@ -33,7 +33,7 @@
         <div class="row">
             <div class="col-md-6 offset-md-3">
                 <h2 class="text-center mb-4 text-white">Form Pembayaran SPP</h2>
-                <form action="" method="post" enctype="multipart/form-data">
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" enctype="multipart/form-data">
                     <div class="mb-3">
                         <label for="nama" class="form-label text-white">Nama Lengkap</label>
                         <input type="text" class="form-control" name="nama" placeholder="Masukkan Nama Lengkap Anda" required>
@@ -86,8 +86,8 @@
                         <input type="text" class="form-control" name="jumlah_pembayaran" id="jumlah_pembayaran" placeholder="Masukkan Jumlah Pembayaran" required readonly>
                     </div>
                     <div class="mb-3">
-                        <label for="bukti_pembayaran" class="form-label text-white">Unggah Bukti Pembayaran</label>
-                        <input type="file" class="form-control" name="bukti_pembayaran" accept="image/*" required>
+                        <label for="bukti_pembayaran" class="form-label text-white">Unggah Bukti Pembayaran (JPG/PNG, max 1 MB)</label>
+                        <input type="file" class="form-control" name="bukti_pembayaran" accept="image/jpeg, image/png" required>
                     </div>
                     <div class="text-center">
                         <button type="submit" class="btn btn-primary">Kirim Pembayaran</button>
@@ -156,6 +156,24 @@
         $tmp_bukti = $_FILES['bukti_pembayaran']['tmp_name'];
         $folder_bukti = "uploads/" . $bukti_pembayaran;
 
+        // Validasi tipe file yang diunggah
+        $allowed_types = array('image/jpeg', 'image/png');
+        $file_info = finfo_open(FILEINFO_MIME_TYPE);
+        $file_type = finfo_file($file_info, $tmp_bukti);
+        finfo_close($file_info);
+
+        if (!in_array($file_type, $allowed_types)) {
+            die("<script>alert('Format file tidak didukung. Hanya JPG atau PNG yang diperbolehkan.'); window.location.href = './';</script>");
+        }
+
+        // Validasi ukuran file yang diunggah (misalnya minimal 1 MB)
+        $file_size_mb = $_FILES['bukti_pembayaran']['size'] / (1024 * 1024); // konversi ke MB
+        $max_file_size_mb = 1; // Ukuran maksimum file dalam MB
+
+        if ($file_size_mb > $max_file_size_mb) {
+            die("<script>alert('Ukuran file terlalu besar. Maksimal {$max_file_size_mb} MB.'); window.location.href = './';</script>");
+        }
+
         if (!is_dir('uploads')) {
             mkdir('uploads', 0777, true);   
         }
@@ -165,14 +183,21 @@
             $stmt->bind_param("sssssssss", $nama, $no_telepon, $email, $alamat, $kelas, $bulan_pembayaran, $tanggal_pembayaran, $jumlah_pembayaran, $bukti_pembayaran);
 
             if ($stmt->execute()) {
-                echo "<script>alert('Data berhasil disimpan'); window.location.href = './home.php';</script>";
+                echo "<script>
+                        alert('Pembayaran SPP berhasil dikirim. Terima kasih sudah mendaftar.');
+                        window.location.href = './home.php';
+                      </script>";
             } else {
-                echo "Error: " . $stmt->error;
+                echo "<script>
+                        alert('Maaf, terjadi kesalahan saat mengirim pembayaran. Silakan coba lagi.');
+                        window.location.href = './';
+                      </script>";
             }
+            
 
             $stmt->close();
         } else {
-            echo "File gagal diunggah.";
+            echo "<script>alert('File gagal diunggah.'); window.location.href = './';</script>";
         }
 
         $koneksi->close();

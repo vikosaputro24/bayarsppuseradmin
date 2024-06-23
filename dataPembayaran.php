@@ -124,19 +124,19 @@ $result = mysqli_query($conn, $query);
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                            <li class="nav-item active"><a class="nav-link" href="./homeAdmin.php">Dashboard</a></li>
+                            <li class="nav-item active"><a class="nav-link" href="./homeAdmin.php">Beranda</a></li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Login</a>
+                                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Masuk</a>
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="./dataLoginAdmin.php">Login Admin</a>
-                                    <a class="dropdown-item" href="./dataLoginUser.php">Login User</a>
+                                    <a class="dropdown-item" href="./dataLoginAdmin.php">Sebagai Admin</a>
+                                    <a class="dropdown-item" href="./dataLoginUser.php">Sebagai User</a>
                                 </div>
                             </li>
                             <li class="nav-item active"><a class="nav-link" href="./dataPembayaran.php">Data Pembayaran</a></li>
                             <li class="nav-item active"><a class="nav-link" href="./adminPengumuman.php">Pengumuman</a></li>
                             <li class="nav-item active"><a class="nav-link" href="./adminStatus.php">Status</a></li>
                         </ul>
-                        <button class="btn btn-primary" id="sidebarToggle" onclick="logoutFunction()"><i class="fas fa-sign-out-alt icon"></i>Logout</button>
+                        <button class="btn btn-primary" id="sidebarToggle" onclick="logoutFunction()"><i class="fas fa-sign-out-alt icon"></i>Keluar</button>
                     </div>
                 </div>
             </nav>
@@ -145,8 +145,8 @@ $result = mysqli_query($conn, $query);
                 <div class="table-responsive">
                     <form method="GET" action="dataPembayaran.php" class="mb-3">
                         <div class="input-group">
-                            <input type="text" name="search" class="form-control" placeholder="Search by Name" value="<?php echo htmlspecialchars($search_query); ?>">
-                            <button class="btn btn-outline-secondary" type="submit">Search</button>
+                            <input type="text" name="search" class="form-control" placeholder="Cari berdasarkan nama" value="<?php echo htmlspecialchars($search_query); ?>">
+                            <button class="btn btn-outline-secondary" type="submit">Cari</button>
                         </div>
                     </form>
                     <table class="table table-bordered" width="100%">
@@ -162,7 +162,7 @@ $result = mysqli_query($conn, $query);
                                 <th>Tanggal pembayaran</th>
                                 <th>Jumlah pembayaran</th>
                                 <th>Bukti Pembayaran</th>
-                                <th>Invoice</th>
+                                <th>Bukti</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -187,12 +187,12 @@ $result = mysqli_query($conn, $query);
                                     </td>
                                     <td>
                                         <a href="javascript:void(0);" onclick="detailFunction(<?php echo $row['id']; ?>)" class="btn btn-sm btn-warning">
-                                            <i class="fas fa-info-circle icon"></i>Invoice
+                                            <i class="fas fa-info-circle icon"></i>Bukti
                                         </a>
                                     </td>
                                     <td>
                                         <a href="dataPembayaran.php?delete_id=<?php echo $row['id']; ?>" class="btn btn-sm btn-danger">
-                                            <i class="fas fa-trash-alt icon"></i> Delete
+                                            <i class="fas fa-trash-alt icon"></i> Hapus
                                         </a>
                                     </td>
                                 </tr>
